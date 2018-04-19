@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.vo.MessageVO;
+
 /**
  * Servlet implementation class ActionServlet
  */
@@ -32,13 +34,21 @@ public class ActionServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		request.setAttribute("x", name);
 		String url = null;
+		MessageVO messageVO = new MessageVO();
 		if(isUser(name)){
-			request.setAttribute("mess", "成功");
+			messageVO.setName("name");
+			messageVO.setMess("成功");
+			messageVO.setSsss("ssss");
+			messageVO.setDddd("dddd");
 			url = "/view/myJsp.jsp";
 		} else {
-			request.setAttribute("mess", "失败");
+			messageVO.setName("name");
+			messageVO.setMess("失败。。。。。");
+			messageVO.setSsss("ssss");
+			messageVO.setDddd("dddd");
 			url = "/view/error.jsp";
 		}
+		request.setAttribute("message", messageVO);
 		RequestDispatcher dis = request.getRequestDispatcher(url);
 		dis.forward(request, response);
 	}
