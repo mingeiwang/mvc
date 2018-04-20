@@ -10,7 +10,7 @@
 <body>
 
 	<% 
-		MessageVO messageVO = (MessageVO)request.getAttribute("message");
+		MessageVO messageVO = (MessageVO)request.getAttribute("mess");
 		
 	%>
 	<table>
