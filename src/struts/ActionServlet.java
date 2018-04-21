@@ -1,6 +1,7 @@
 package struts;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.Action;
-import action.PanduanAction;
-import service.vo.MessageVO;
+import struts.action.Action;
+import struts.core.XmlBean;
+import struts.form.ActionForm;
+import struts.form.FullBean;
 
 /**
  * Servlet implementation class ActionServlet
@@ -34,33 +36,30 @@ public class ActionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
-		//String url = demo(request, name);
+		//获得请求头
+		String path = getPath(request.getServletPath());
+		Map<String, XmlBean> map = (Map<String, XmlBean>) this.getServletContext().getAttribute("strtus");
+		XmlBean xmlBean = map.get(path);
+		String formClass = xmlBean.getFormClass();
+		//封装请求的bean
+		ActionForm form = FullBean.full(formClass, request);
+		String actionType = xmlBean.getActionType();
+		Action action = null;
 		String url = null;
-		Action action = new PanduanAction();
-		url = action.execute(request);
+		try {
+			Class clazz = Class.forName(actionType);
+			action = (Action) clazz.newInstance();
+			url = action.execute(request,form, xmlBean.getActionForward());
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("严重：操作异常");
+		}
 		RequestDispatcher dis = request.getRequestDispatcher(url);
 		dis.forward(request, response);
 	}
 
-	private String demo(HttpServletRequest request, String name) {
-		request.setAttribute("x", name);
-		String url = null;
-		MessageVO messageVO = new MessageVO();
-		if(isUser(name)){
-			messageVO.setName("name");
-			messageVO.setMess("成功");
-			messageVO.setSsss("ssss");
-			messageVO.setDddd("dddd");
-			url = "/view/myJsp.jsp";
-		} else {
-			messageVO.setName("name");
-			messageVO.setMess("失败。。。。。");
-			messageVO.setSsss("ssss");
-			messageVO.setDddd("dddd");
-			url = "/view/error.jsp";
-		}
-		request.setAttribute("message", messageVO);
-		return url;
+	private String getPath(String servletPath){
+		return servletPath.split("\\.")[0];
 	}
 
 	/**
