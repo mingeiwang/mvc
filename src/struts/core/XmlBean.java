@@ -7,8 +7,11 @@ public class XmlBean {
 
 	private String name;
 	private String path;
+	/**
+	 * actionClass
+	 */
 	private String actionType;
-	private String actionClass;
+	
 	private String formClass;
 	private Map<String, String> actionForward = new HashMap<>();
 	
@@ -31,12 +34,6 @@ public class XmlBean {
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
 	}
-	public String getActionClass() {
-		return actionClass;
-	}
-	public void setActionClass(String actionClass) {
-		this.actionClass = actionClass;
-	}
 	public String getFormClass() {
 		return formClass;
 	}
@@ -55,7 +52,6 @@ public class XmlBean {
 		this.name = name;
 		this.path = path;
 		this.actionType = actionType;
-		this.actionClass = actionClass;
 		this.formClass = formClass;
 		this.actionForward = actionForward;
 	}
@@ -64,9 +60,10 @@ public class XmlBean {
 	}
 	@Override
 	public String toString() {
-		return "XmlBean [name=" + name + ", path=" + path + ", actionType=" + actionType + ", actionClass="
-				+ actionClass + ", formClass=" + formClass + ", actionForward=" + actionForward + "]";
+		return "XmlBean [name=" + name + ", path=" + path + ", actionType=" + actionType + ", formClass=" + formClass
+				+ ", actionForward=" + actionForward + "]";
 	}
+	
 	
 	
 	

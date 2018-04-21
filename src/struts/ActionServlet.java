@@ -36,9 +36,13 @@ public class ActionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		//获得请求头
 		String path = getPath(request.getServletPath());
-		Map<String, XmlBean> map = (Map<String, XmlBean>) this.getServletContext().getAttribute("strtus");
+		System.out.println("请求路径："+path);
+		Map<String, XmlBean> map = (Map<String, XmlBean>) this.getServletContext().getAttribute("struts");
 		XmlBean xmlBean = map.get(path);
 		String formClass = xmlBean.getFormClass();
 		//封装请求的bean

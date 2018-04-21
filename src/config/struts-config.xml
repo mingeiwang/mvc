@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strtus>
+	<formbeans>
+		<bean name="panduan" class="form.vo.PanduanForm"/>
+	</formbeans>
+	<action-mapping> 
+		<action name="panduan" type="form.action.PanduanAction" path="/panduan">
+			<forward name="chenggong" value="/view/myJsp.jsp" ></forward>
+			<forward name="shibai" value="/view/shibai.jsp" ></forward>
+		</action>
+	</action-mapping>
+</strtus>

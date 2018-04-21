@@ -53,7 +53,7 @@ public class StrutsConfig {
 			}
 			xmlBean.setName(name);
 			xmlBean.setPath(path);
-			xmlBean.setActionClass(classPath);
+			xmlBean.setFormClass(classPath);
 			xmlBean.setActionType(type);
 			List<Element> forwards = element.getChildren();
 			System.out.println("actionRoot:name="+name+"||type="+type+"||path="+path);;

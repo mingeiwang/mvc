@@ -1,4 +1,5 @@
-<%@page import="service.vo.MessageVO"%>
+
+<%@page import="form.vo.PanduanForm"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,17 +11,17 @@
 <body>
 
 	<% 
-		MessageVO messageVO = (MessageVO)request.getAttribute("mess");
+		PanduanForm panduan = (PanduanForm)request.getAttribute("model");
 		
 	%>
 	<table>
 		<tr>
-			<td><%=messageVO.getName() %></td>
-			<td><%=messageVO.getDddd() %></td>
+			<td><%=panduan.getName() %></td>
+			<td><%=panduan.getPassword() %></td>
 		</tr>
 		<tr>
-			<td><%=messageVO.getMess() %></td>
-			<td><%=messageVO.getSsss() %></td>
+			<td><%=panduan.getMess() %></td>
+			<td><%=panduan.getResult() %></td>
 		</tr>
 	</table>
 </body>
